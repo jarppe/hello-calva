@@ -1,0 +1,35 @@
+{:paths   ["src/clj" "resources"]
+ :deps    {org.clojure/clojure             {:mvn/version "1.10.3"}
+           integrant/integrant             {:mvn/version "0.8.0"}
+           aero/aero                       {:mvn/version "1.1.6"}
+           ;; Crux:
+           pro.juxt.crux/crux-core         {:mvn/version "1.18.1" :exclusions [org.slf4j/slf4j-nop]}
+           pro.juxt.crux/crux-rocksdb      {:mvn/version "1.18.1"}
+           ;; Misc:
+           danlentz/clj-uuid               {:mvn/version "0.1.9"}
+           ;; Logging:
+           org.clojure/tools.logging       {:mvn/version "1.1.0"}
+           ch.qos.logback/logback-classic  {:mvn/version "1.2.5"}
+           org.slf4j/jcl-over-slf4j        {:mvn/version "1.7.32"}
+           org.slf4j/jul-to-slf4j          {:mvn/version "1.7.32"}
+           org.jboss.logging/jboss-logging {:mvn/version "3.4.2.Final"}}
+ :aliases {:prod {:main-opts ["-m" "hello.main"]
+                  :jvm-opts  ["-Dclojure.tools.logging.factory=clojure.tools.logging.impl/slf4j-factory"
+                              "--add-opens=java.base/java.util.concurrent=ALL-UNNAMED"]}
+           :dev  {:extra-paths ["src/dev"]
+                  :extra-deps  {nrepl/nrepl                {:mvn/version "0.8.3"}
+                                cider/cider-nrepl          {:mvn/version "0.26.0"}
+                                integrant/repl             {:mvn/version "0.3.2"}
+                                aprint/aprint              {:mvn/version "0.1.3"}
+                                zcaudate/lucid.core.inject {:mvn/version "1.4.7"}
+                                zcaudate/lucid.core.debug  {:mvn/version "1.4.7"}}
+                  :main-opts   ["-m" "nrepl.cmdline"
+                                "--middleware" "[cider.nrepl/cider-middleware]"
+                                "-b" "0.0.0.0"
+                                "-p" "4000"]
+                  :jvm-opts    ["-Dclojure.tools.logging.factory=clojure.tools.logging.impl/slf4j-factory"
+                                "--add-opens=java.base/java.util.concurrent=ALL-UNNAMED"]}
+           :test {:extra-paths ["test"]
+                  :extra-deps  {lambdaisland/kaocha {:mvn/version "1.0.861"}}}
+           :outdated {:extra-deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
+                      :main-opts ["-m" "antq.core"]}}}

@@ -1,0 +1,7 @@
+{:mode #keyword #env MODE
+ :crux {:crux/tx-log         {:kv-store {:crux/module crux.rocksdb/->kv-store
+                                         :db-dir      #file "/data/txs"}}
+        :crux/document-store {:kv-store {:crux/module crux.rocksdb/->kv-store
+                                         :db-dir      #file "/data/docs"}}
+        :crux/index-store    {:kv-store {:crux/module crux.rocksdb/->kv-store
+                                         :db-dir      #file "/data/idx"}}}}

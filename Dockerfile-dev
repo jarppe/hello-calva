@@ -1,0 +1,13 @@
+FROM clojure:openjdk-18-tools-deps-slim-buster
+RUN groupadd -g 1001 dev                                  && \
+    useradd -u 1000 -g dev -m dev                         && \
+    install -o dev -g dev -d /home/dev/.clojure           && \
+    cp -r /root/.clojure/tools /home/dev/.clojure         && \
+    echo '                                                \
+    {:mvn/local-repo "/home/dev/.m2/repository"}          \
+    ' > /home/dev/.clojure/deps.edn                       && \
+    chown -R dev:dev /home/dev/.clojure
+ENV HOME=/home/dev
+USER dev:dev
+WORKDIR /home/dev/app
+ENTRYPOINT ["clojure"]

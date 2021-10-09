@@ -1,0 +1,26 @@
+---
+version: '3.8'
+
+services:
+
+  server:
+    image: hello-calva:dev
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    init: true
+    user: "1000:1001"
+    command:
+      - "-M:test:dev"
+    ports:
+      - "127.0.0.1:4000:4000"
+    volumes:
+      - ~/.m2:/home/dev/.m2
+      - .:/home/dev/app
+      - data:/data
+    environment:
+      - MODE=dev
+      - MALLOC_ARENA_MAX=2
+
+volumes:
+  data:

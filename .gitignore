@@ -1,0 +1,33 @@
+/.env
+
+
+#
+# Clojure
+#
+
+/.cpcache/
+/.nrepl-port
+
+
+#
+# IntelliJ IDEA
+#
+
+/.idea/
+/*.iml
+
+
+#
+# Calva
+#
+
+/.calva/output-window
+/.lsp/.cache
+/.clj-kondo/.cache
+
+#
+# Misc:
+#
+
+*.swp
+
